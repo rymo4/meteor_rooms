@@ -10,7 +10,6 @@ Meteor.subscribe('rooms', function(){
   }
 });
 
-
 Template.new_room.events({
   'click #new_room' : function(){
     var room_name = $('#room_name').val();

@@ -8,9 +8,12 @@ Meteor.autosubscribe(function(){
 Template.new_player.events({
   'click #new_player' : function(){
     var player_name = $('#player_name').val();
+    var room_id = Session.get('room_id');
+    var players_in_room = Players.find({room_id: room_id}).fetch();
     var id = Players.insert({
       name: player_name,
-      room_id: Session.get('room_id')
+      room_id: room_id,
+      host: (players_in_room.length == 0)
     });
     localStorage.setItem('player_id', id);
     Session.set('player_id', id);
