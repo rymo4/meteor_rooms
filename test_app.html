@@ -1,0 +1,42 @@
+<head>
+  <title>test_app</title>
+</head>
+
+<body>
+  {{>home}}
+</body>
+
+<template name="home">
+  {{#if current_room}}
+    {{>in_room}}
+  {{else}}
+    {{>new_room}}
+  {{/if}}
+</template>
+
+<template name="in_room">
+  You are in {{current_room.name}}
+  <br>
+  {{#if current_player}}
+    You are {{current_player.name}}
+  {{else}}
+    {{>new_player}}
+  {{/if}}
+
+  <h2>Players</h2>
+  <ul>
+  {{#each players}}
+    <li>{{name}}</li>
+  {{/each}}
+  </ul>
+</template>
+
+<template name="new_room">
+  <input id="room_name" type="textfield" placeholder="Room Name"/>
+  <input id="new_room" type="button" value="New Room"/>
+</template>
+
+<template name="new_player">
+  <input id="player_name" type="textfield" placeholder="Your Name"/>
+  <input id="new_player" type="button" value="Join"/>
+</template>
