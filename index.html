@@ -3,8 +3,21 @@
 </head>
 
 <body>
-  {{>home}}
+  {{>nav}}
+  <div class="row">
+    <div class="six columns push-three panel">
+      {{>home}}
+    </div>
+  </div>
 </body>
+
+<template name="nav">
+  <nav class="top-bar">
+    <ul>
+      <li class="name"><h1><a href="/">Rooms</a></h1></li>
+    </ul>
+  </nav>
+</template>
 
 <template name="home">
   {{#if current_room}}
@@ -15,28 +28,33 @@
 </template>
 
 <template name="in_room">
-  You are in {{current_room.name}}
-  <br>
   {{#if current_player}}
-    You are {{current_player.name}}
+    <h4 class="subheader">Currenly in {{current_room.name}}.</h4>
   {{else}}
+    <h4 class="subheader">You are about to join {{current_room.name}}.</h4>
     {{>new_player}}
   {{/if}}
 
-  <h2>Players</h2>
-  <ul>
+  <table class="twelve">
+    <thead>
+      <tr><th>Players</th></tr>
+    </thead>
+    <tr><td>You</td></tr>
   {{#each players}}
-    <li>{{name}}</li>
+    <tr>
+      <td>{{name}}</td>
+    </tr>
   {{/each}}
-  </ul>
+  </table>
 </template>
 
 <template name="new_room">
-  <input id="room_name" type="textfield" placeholder="Room Name"/>
-  <input id="new_room" type="button" value="New Room"/>
+  <h5 class="subheader">Create a room for your friends to join!</h5>
+  <input id="room_name" type="text" placeholder="Room Name"/>
+  <input class="button large radius" id="new_room" type="button" value="Make The Room"/>
 </template>
 
 <template name="new_player">
-  <input id="player_name" type="textfield" placeholder="Your Name"/>
-  <input id="new_player" type="button" value="Join"/>
+  <input id="player_name" type="text" placeholder="Enter Your Name to Get Started"/>
+  <input class="button large radius" id="new_player" type="button" value="Join"/>
 </template>

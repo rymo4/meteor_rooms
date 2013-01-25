@@ -10,6 +10,7 @@ Meteor.subscribe('rooms', function(){
   }
 });
 
+
 Template.new_room.events({
   'click #new_room' : function(){
     var room_name = $('#room_name').val();
@@ -26,10 +27,14 @@ Template.home.current_room = function(){
   return Rooms.findOne({_id: Session.get('room_id')});
 };
 
+Template.nav.current_room = function(){
+  return Rooms.findOne({_id: Session.get('room_id')});
+};
+
 Template.in_room.current_room = function(){
   return Rooms.findOne({_id: Session.get('room_id')});
 };
 
 Template.in_room.players = function(){
-  return Players.find({});
+  return Players.find({_id: {$ne: Session.get('player_id')}});
 };
