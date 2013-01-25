@@ -35,17 +35,23 @@
     {{>new_player}}
   {{/if}}
 
-  <table class="twelve">
-    <thead>
-      <tr><th>Players</th></tr>
-    </thead>
-    <tr><td>You</td></tr>
-  {{#each players}}
-    <tr>
-      <td>{{name}}</td>
-    </tr>
-  {{/each}}
-  </table>
+  {{#if players.length}}
+    <table class="twelve">
+      <thead>
+        <tr><th>Players</th></tr>
+      </thead>
+      {{#if current_player}}
+        <tr><td>You</td></tr>
+      {{/if}}
+    {{#each other_players}}
+      <tr>
+        <td>{{name}}</td>
+      </tr>
+    {{/each}}
+    </table>
+  {{else}}
+    <h3 class="subheader">Nobody is here yet.</h3>
+  {{/if}}
 </template>
 
 <template name="new_room">

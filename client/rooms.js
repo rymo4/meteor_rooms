@@ -36,5 +36,9 @@ Template.in_room.current_room = function(){
 };
 
 Template.in_room.players = function(){
+  return Players.find({}).fetch();
+};
+
+Template.in_room.other_players = function(){
   return Players.find({_id: {$ne: Session.get('player_id')}});
 };
