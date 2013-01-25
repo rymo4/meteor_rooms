@@ -1,14 +1,16 @@
 # Rooms
 
-A starter app written in Meteor to act as a base for any app involving players joining rooms/games/channels.
-Mostly just a test app to see how Meteor is and if I should write more in it. So far, so good. 
+An app written in [Meteor](http://meteor.com/) to act as a base for any app involving players joining 
+rooms/games/channels/lobbies. Mostly just a test app to see how Meteor is and if I should write more in it. 
+So far, so good. 
 
 ## Features
 
 * Create a room with a name
-* Go to the room url and create a player
-* Auto join the room
-* Logout of the room (deletes the player)
+* First player in the room is the host
+* Other players join the room and create a player
+* Host can start the game, preventing others from signing up
+* Realtime updates everywhere
 
 ## License (MIT)
 
