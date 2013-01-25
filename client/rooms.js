@@ -13,8 +13,22 @@ Meteor.subscribe('rooms', function(){
 Template.new_room.events({
   'click #new_room' : function(){
     var room_name = $('#room_name').val();
-    var id = Rooms.insert({name: room_name});
+    var id = Rooms.insert({name: room_name, open: true});
     Router.setRoom(id);
+  }
+});
+
+Template.in_room.events({
+  'click #start_game' : function(){
+    var start = confirm("Are you sure you want to start the game? "
+      + "Nobody will be able to join after the game starts.");
+    if (start){
+      console.log('GAME STARTED');
+      Rooms.update(
+        {_id: Session.get('room_id')},
+        {$set: {open: false}}
+      );
+    }
   }
 });
 

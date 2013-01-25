@@ -49,6 +49,9 @@
       </tr>
     {{/each}}
     </table>
+    {{#if current_player.host}}
+      <input id="start_game" class="button large radius" type="button" value="Start Game">
+    {{/if}}
   {{else}}
     <h3 class="subheader">Nobody is here yet.</h3>
   {{/if}}
