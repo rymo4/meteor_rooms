@@ -21,7 +21,11 @@
 
 <template name="home">
   {{#if current_room}}
-    {{>in_room}}
+    {{#if current_room.open}}
+      {{>in_room}}
+    {{else}}
+      {{>play}}
+    {{/if}}
   {{else}}
     {{>new_room}}
   {{/if}}
@@ -66,4 +70,8 @@
 <template name="new_player">
   <input id="player_name" type="text" placeholder="Enter Your Name to Get Started"/>
   <input class="button large radius" id="new_player" type="button" value="Join"/>
+</template>
+
+<template name="play">
+  PLAYING
 </template>

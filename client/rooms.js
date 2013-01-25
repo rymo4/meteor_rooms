@@ -10,6 +10,18 @@ Meteor.subscribe('rooms', function(){
   }
 });
 
+
+var room_id = Session.get('room_id');
+
+Rooms.find().observe({
+  changed: function(new_room, atIndex, old_room){
+    if (new_room._id === Session.get('room_id') &&
+      new_room.open !== old_room.open){
+        Router.startGame(new_room._id);
+    }
+  }
+  });
+
 Template.new_room.events({
   'click #new_room' : function(){
     var room_name = $('#room_name').val();
@@ -23,11 +35,8 @@ Template.in_room.events({
     var start = confirm("Are you sure you want to start the game? "
       + "Nobody will be able to join after the game starts.");
     if (start){
+      Router.startGame(Session.get('room_id'));
       console.log('GAME STARTED');
-      Rooms.update(
-        {_id: Session.get('room_id')},
-        {$set: {open: false}}
-      );
     }
   }
 });
@@ -55,3 +64,8 @@ Template.in_room.players = function(){
 Template.in_room.other_players = function(){
   return Players.find({_id: {$ne: Session.get('player_id')}});
 };
+
+Meteor.startup(function () {
+  // Use this for localStorage reactivity
+  Session.set('room_id', localStorage.getItem('room_id'));
+});
